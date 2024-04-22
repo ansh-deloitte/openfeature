@@ -42,7 +42,7 @@ spec:
               - "@faas.com"
               - var:
                 - email
-            - yellow
+            - green
             -
         state: ENABLED
 ---
