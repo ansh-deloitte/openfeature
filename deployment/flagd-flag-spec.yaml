@@ -1,0 +1,70 @@
+apiVersion: core.openfeature.dev/v1alpha3
+kind: FlagSourceConfiguration
+metadata:
+    name: source-configuration
+    namespace: open-feature-demo
+spec:
+    metricsPort: 8080
+    evaluator: json
+    defaultSyncProvider: kubernetes
+    tag: v0.4.4
+    sources:
+    - source: open-feature-demo/server-side
+      provider: kubernetes
+    - source: open-feature-demo/client-side
+      provider: kubernetes
+    probesEnabled: true
+---
+apiVersion: core.openfeature.dev/v1alpha2
+kind: FeatureFlagConfiguration
+metadata:
+  name: client-side
+  namespace: open-feature-demo
+spec:
+  featureFlagSpec:
+    flags:
+      new-welcome-message:
+        state: ENABLED
+        variants:
+          'on': true
+          'off': false
+        defaultVariant: 'off'
+      hex-color:
+        variants:
+          red: c05543
+          green: 2f5230
+          blue: 0d507b
+          yellow: d4ac0d
+        defaultVariant: green
+        targeting:
+            if:
+            - in:
+              - "@faas.com"
+              - var:
+                - email
+            - yellow
+            -
+        state: ENABLED
+---
+apiVersion: core.openfeature.dev/v1alpha2
+kind: FeatureFlagConfiguration
+metadata:
+  name: server-side
+  namespace: open-feature-demo
+spec:
+  featureFlagSpec:
+    flags:
+      fib-algo:
+        variants:
+          recursive: recursive
+          memo: memo
+          loop: loop
+          binet: binet
+        defaultVariant: recursive
+        state: ENABLED
+      use-remote-fib-service:
+        variants:
+          'on': true
+          'off': false
+        defaultVariant: 'off'
+        state: ENABLED

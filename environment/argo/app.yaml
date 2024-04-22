@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  generation: 12
+  name: openfeature-demo
+  namespace: argocd
+spec:
+  destination:
+    namespace: open-feature-demo
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: deployment
+    repoURL: {{GITOPS_REPO}}
+    targetRevision: HEAD
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
