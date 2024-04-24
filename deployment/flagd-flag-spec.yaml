@@ -39,11 +39,12 @@ spec:
         targeting:
             if:
             - in:
-              - "@deloite.com"
+              - "@deloitte.com"
+              - "@hashedin.com"
               - var:
                 - email
             - yellow
-            -
+            - red
         state: ENABLED
 ---
 apiVersion: core.openfeature.dev/v1alpha2
