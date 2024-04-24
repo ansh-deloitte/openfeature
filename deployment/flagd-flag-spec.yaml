@@ -35,15 +35,7 @@ spec:
           green: 2f5230
           blue: 0d507b
           yellow: d4ac0d
-        defaultVariant: green
-        targeting:
-            if:
-            - in:
-              - "@deloitte.com"
-              - var:
-                - email
-            - yellow
-            - 
+        defaultVariant: green 
         state: ENABLED
 ---
 apiVersion: core.openfeature.dev/v1alpha2
