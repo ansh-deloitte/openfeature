@@ -39,7 +39,7 @@ spec:
         targeting:
             if:
             - in:
-              - "@faas.com"
+              - "@deloite.com"
               - var:
                 - email
             - yellow
